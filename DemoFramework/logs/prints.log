@@ -1,0 +1,5 @@
+13:42:27.546 [TestNG-tests-2] INFO  resources.base - Navigated to Homepage
+13:42:30.633 [TestNG-tests-4] INFO  resources.base - Navigation bar is displayed
+13:42:33.442 [TestNG-tests-1] INFO  resources.base - Restrcited User
+13:42:33.992 [TestNG-tests-2] INFO  resources.base - Successfully validated text messages
+13:42:34.915 [TestNG-tests-1] INFO  resources.base - Non restricted user
