@@ -2,10 +2,12 @@ package TestCases;
 
 import java.io.IOException;
 
+import org.apache.commons.mail.EmailException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -15,7 +17,7 @@ import pageObjects.BookAppointmentPage;
 
 
 import pageObjects.LoginPage;
-
+import resources.SendEmail;
 import resources.TestBase;
 
 public class TC extends TestBase {
@@ -59,14 +61,20 @@ public class TC extends TestBase {
 		LoginPage lp = new LoginPage(driver);
 		lp.loginApp(prop.getProperty("userName"), prop.getProperty("passWord"));
 		BookAppointmentPage ba = new BookAppointmentPage(driver);
-		//ba.clickBookAppointmentButton();
 		Assert.assertFalse(ba.validateBookAppointmentWithPreviousDate("Please be informed that your appointment has been booked as following:"));
 	
 	}
 	
+	
 	@AfterTest
-	public void tearDown() {
+	public void tearDown(ITestResult result) throws EmailException {
+	
+		if(result.getStatus() == ITestResult.FAILURE)
+		{
+			SendEmail.sendEmail();
+		}
 		driver.close();
+		
 	}
 
 }
